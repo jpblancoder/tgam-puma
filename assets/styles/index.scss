@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.pen-search {
+  margin-left: 37px;
+  width: 315px;
+}
+
+.pen-output > li {
+  margin-bottom: 6px;
+}
+
+.pen-output > li > a {
+  color: blue;
+  &:link,
+  &:visited {
+    color: blue;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    color: navy;
+  }
+}
+
+.pen-highlight {
+  background-color: #FF6720;
+  color: #190000;
+  font-weight: bold;
+}

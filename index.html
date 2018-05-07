@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>TGAM Puma</title>
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" href="./assets/styles/normalize.css">
+    <link rel="stylesheet" href="./assets/styles/index.scss">
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <p>😺 - Select your pen or create one: <strong>npm run add</strong></p>
+
+    <p><input type="search" name="q" id="pen-search" class="pen-search"
+        autofocus placeholder="Type to filter list ..." /></p>
+
+    <ul id="pen-output" class="pen-output"></ul>
+    <script>
+      // use posthtml-expressions unescapeDelimiters (ignore lint warnings)
+      var pens = {{{ JSON.stringify(pens) }}};
+    </script>
+  </body>
+</html>

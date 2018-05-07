@@ -1,0 +1,39 @@
+{
+  "meta": [
+    {
+      "charset": "utf-8"
+    }
+  ],
+  "link": [
+    {
+      "rel": "icon",
+      "type": "image/png",
+      "href": "../../assets/favicon/favicon-32x32.png",
+      "sizes": "32x32"
+    },
+    {
+      "rel": "icon",
+      "type": "image/png",
+      "href": "../../assets/favicon/favicon-16x16.png",
+      "sizes": "16x16"
+    },
+    {
+      "rel": "stylesheet",
+      "href": "../../assets/styles/normalize.css"
+    },
+    {
+      "rel": "stylesheet",
+      "href": "./style.scss"
+    }
+  ],
+  "script": [
+    {
+      "src": "./script.js"
+    }
+  ],
+  "base": [
+    {
+      "href": "/"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "posthtml-head-elements": {
+      "headElements": "./partial/pen/head.json"
+    },
+    "posthtml-include": {
+      "root": "./"
+    },
+    "posthtml-expressions": {
+      "locals": {
+        "pens": {
+          "Collection_iteration": "Collection iteration",
+          "Date_sort_function": "Date sort function",
+          "Deep_diff_objects": "Deep diff objects",
+          "IE_11_grid_issue": "IE 11 grid issue",
+          "Iterating_nodelists": "Iterating nodelists",
+          "Lodash_condition": "Lodash condition",
+          "Method_destructuring": "method destructuring",
+          "Object.keys_find_match": "Object.keys find match",
+          "Safely_accessing_deeply_nested_values": "Safely accessing deeply nested values",
+          "Testing_Object.defineProperty()": "Testing Object.defineProperty()",
+          "Testing_more_destructuring": "Testing more destructuring",
+          "isFunctionThenInvoke": "isFunctionThenInvoke"
+        }
+      }
+    }
+  }
+}

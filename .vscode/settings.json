@@ -1,0 +1,19 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.cache": true,
+    "**/.vscode": true,
+    "**/dist": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "dist/": true,
+    "npm-debug.log": true,
+    "yarn-error.log": true,
+    "yarn.lock": true,
+    "sass-lint.yml": true,
+    ".*": true
+  }
+}

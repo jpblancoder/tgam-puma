@@ -1,0 +1,51 @@
+{
+  "name": "tgam-puma",
+  "version": "1.0.0",
+  "description": "The Globe and Mail's CodePen for PageBuilder",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "open": "open 'http://localhost:1234/'",
+    "start": "concurrently \"parcel index.html -p 1234\" \"open 'http://localhost:1234/'\"",
+    "test": "echo 'Error: no test specified' && exit 1",
+    "traffic": "open 'http://localhost:4040/'",
+    "tunnel": "concurrently \"open http://localhost:4040/\" \"ngrok http 1234\"",
+    "sync": "gulp config:sync",
+    "add": "gulp pen:add",
+    "remove": "gulp pen:remove",
+    "trim": "gulp pen:trim"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "domready": "1.0.8",
+    "es6-promise": "4.2.4",
+    "lodash": "4.17.5",
+    "reqwest": "2.0.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "8.4.1",
+    "babel-core": "6.26.0",
+    "babel-preset-es2015": "6.24.1",
+    "concurrently": "3.5.1",
+    "dotenv": "5.0.1",
+    "eslint": "4.18.2",
+    "eslint-config-idiomatic": "4.0.0",
+    "eslint-friendly-formatter": "3.0.0",
+    "eslint-loader": "2.0.0",
+    "fancy-log": "1.3.2",
+    "fuzzy": "0.1.3",
+    "gulp": "3.9.1",
+    "gulp-debug": "4.0.0",
+    "gulp-prompt": "1.0.1",
+    "inquirer-autocomplete-prompt": "0.12.2",
+    "node-sass": "4.7.2",
+    "posthtml-expressions": "1.1.0",
+    "posthtml-head-elements": "0.5.0",
+    "posthtml-include": "1.1.0",
+    "promise": "8.0.1",
+    "run-sequence": "2.2.1",
+    "through2": "2.0.3",
+    "vinyl-paths": "2.1.0"
+  }
+}
