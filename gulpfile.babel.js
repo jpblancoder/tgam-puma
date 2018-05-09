@@ -191,7 +191,7 @@ function addPen(metaData, key, value) {
   return ret;
 }
 
-// remove a new pen to the metaData
+// remove a new pen from the metaData
 function removePen(metaData, key) {
   let ret = _.cloneDeep(metaData);
   _.unset(ret, `${paths.meta.pens}['${key}']`);
@@ -201,6 +201,36 @@ function removePen(metaData, key) {
 // return the relative pen folder path
 function destFolder(folder) {
   return `${paths.pens}${folder}/`;
+}
+
+// generate the config for a title
+function promptInput({ message } = {}) {
+  return {
+    type: "input",
+    name: "title",
+    message
+  };
+}
+
+// generate the config for a pen selection prompt
+function promptSelect({ message, choices } = {}) {
+  return {
+    type: "autocomplete",
+    name: "pen", // answer key
+    message, // displaed to user
+    choices, // of pens in list
+    pageSize: 10,
+    // autocomplete fuzzy search
+    source: (answers, input) => {
+      let term = input || "";
+      return new Promise(resolve => {
+        var result = fuzzy.filter(term, choices);
+        resolve(result.map(el => {
+          return el.original;
+        }));
+      });
+    }
+  };
 }
 
 // copy all the config files from PageBuilder repo into this repo
@@ -253,16 +283,16 @@ gulp.task("pen:add", () => {
   const metaData = loadPens(paths.meta.root);
 
   return gulp.src("./gulpfile.babel.js")
-    .pipe(prompt.prompt({
-      type: "input",
-      name: "title",
-      message: "Enter the pen title:"
-    }, (answer) => {
+    .pipe(prompt.prompt([
+      promptInput({
+        message: "Enter new pen title:"
+      })
+    ], (answer) => {
       log(`Creating new pen: ${answer.title}`);
-
       const folder = sanitizeFolder(answer.title);
       const destination = destFolder(folder);
       const newData = addPen(metaData, folder, answer.title);
+
       savePens(paths.meta.root, newData);
 
       const url = `${paths.localhost.pens}${folder}/${paths.partial.pen.markup}`;
@@ -280,45 +310,75 @@ gulp.task("pen:add", () => {
 });
 
 // delete an unwanted pen item and related folder
-gulp.task("pen:remove", () => {
+gulp.task("pen:remove", (done) => {
   const metaData = loadPens(paths.meta.root);
   const pens = _.get(metaData, paths.meta.pens);
   const values = Object.keys(pens).map(k => pens[k]);
 
   return gulp.src("./gulpfile.babel.js")
-    .pipe(prompt.prompt({
-      type: "autocomplete",
-      name: "title",
-      message: "Select the pen to delete:",
-      choices: values,
-      pageSize: 10,
-      // autocomplete fuzzy search
-      source: (answers, input) => {
-        let term = input || "";
-        return new Promise(resolve => {
-          var result = fuzzy.filter(term, values);
-          resolve(result.map(el => {
-            return el.original;
-          }));
-        });
-      }
-    }, (answer) => {
-      log(`Deleting pen: ${answer.title}`);
-
-      const folder = sanitizeFolder(answer.title);
+    .pipe(prompt.prompt([
+      promptSelect({
+        message: "Select the pen to delete:",
+        choices: values
+      })
+    ], (answer) => {
+      log(`Deleting pen: ${answer.pen}`);
+      const folder = sanitizeFolder(answer.pen);
       const destination = destFolder(folder);
       const newData = removePen(metaData, folder);
+
       savePens(paths.meta.root, newData);
 
-      log(`Deleted folder: ${destination}`);
+      fs.rmdir(destination, (err) => {
+        if (err) {
+          throw err;
+        }
+        log(`Deleted folder: ${destination}`);
+        done();
+      });
+    }));
+});
 
-      return gulp.src(destination)
-        .pipe(vinylPaths(del));
+// rename an existing pen item and related folder
+gulp.task("pen:rename", (done) => {
+  const metaData = loadPens(paths.meta.root);
+  const pens = _.get(metaData, paths.meta.pens);
+  const values = Object.keys(pens).map(k => pens[k]);
+
+  return gulp.src("./gulpfile.babel.js")
+    .pipe(prompt.prompt([
+      promptSelect({
+        message: "Select the pen to rename:",
+        choices: values
+      }),
+      promptInput({
+        message: "Enter new pen title:"
+      })
+    ], (answer) => {
+      log(`Renaming pen: ${answer.pen}`);
+      const folder = sanitizeFolder(answer.pen);
+      const destination = destFolder(folder);
+      let newData = removePen(metaData, folder);
+
+      log(`Renamed pen: ${answer.title}`);
+      const newFolder = sanitizeFolder(answer.title);
+      const newDestination = destFolder(newFolder);
+      newData = addPen(newData, newFolder, answer.title);
+
+      savePens(paths.meta.root, newData);
+
+      fs.renameSync(destination, newDestination, (err) => {
+        if (err) {
+          throw err;
+        }
+        log(`Renamed folder: ${newDestination}`);
+        done();
+      });
     }));
 });
 
 // prune and save the pens metaData of expired pens
 gulp.task("pen:trim", () => {
-  log("Pruning any pens which don't have folders ...");
+  log("Pruning any pens, which don't have folders ...");
   savePens(paths.meta.root, loadPens(paths.meta.root));
 });

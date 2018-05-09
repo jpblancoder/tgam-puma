@@ -12,6 +12,7 @@
     "sync": "gulp config:sync",
     "add": "gulp pen:add",
     "remove": "gulp pen:remove",
+    "rename": "gulp pen:rename",
     "trim": "gulp pen:trim"
   },
   "keywords": [],

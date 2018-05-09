@@ -12,8 +12,8 @@ domReady(() => {
   const onKeyUp = () => {
     listPens(search.value, list, output);
   };
+  onKeyUp(); // display full list by default
   search.addEventListener("keyup", onKeyUp);
-  onKeyUp();
 });
 
 function listPens(input = "", values, output) {
