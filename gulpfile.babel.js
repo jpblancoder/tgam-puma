@@ -1,4 +1,4 @@
-/* global process, Buffer */
+/* global process, __filename, Buffer */
 
 import _ from "lodash";
 import autocomplete from "inquirer-autocomplete-prompt";
@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import fs from "fs"; // node file system
 import fuzzy from "fuzzy";
 import gulp from "gulp";
+import open from "gulp-open";
 import log from "fancy-log";
 import prompt from "gulp-prompt";
 import runSequence from "run-sequence";
@@ -45,18 +46,17 @@ const transform = {
 };
 
 // glob file paths for gulp tasks
-const paths = {
+const path = {
+  localhost: "http://localhost:1234/",
   meta: {
-    root: "./.posthtmlrc", // contains (metaPens) data
+    root: "./.posthtmlrc", // contains pens data
     pens: "plugins['posthtml-expressions'].locals.pens" // object path
   },
-  pens: "./pens/",
-  localhost: {
-    pens: "http://localhost:1234/pens/"
+  codepen: {
+    markup: "codepen.html"
   },
   partial: {
     pen: {
-      root: "./partial/pen/",
       markup: "markup.html",
       script: "script.js",
       style: "style.scss"
@@ -83,15 +83,15 @@ const paths = {
 };
 
 // config paths to remote repo
-paths.remote.package = paths.remote.root + paths.base.package;
-paths.remote.configs = _.map(paths.base.configs, filename => {
-  return paths.remote.root + filename;
+path.remote.package = path.remote.root + path.base.package;
+path.remote.configs = _.map(path.base.configs, filename => {
+  return path.remote.root + filename;
 });
 
 // config paths to local repo
-paths.local.package = paths.local.root + paths.base.package;
-paths.local.configs = _.map(paths.base.configs, filename => {
-  return paths.local.root + filename;
+path.local.package = path.local.root + path.base.package;
+path.local.configs = _.map(path.base.configs, filename => {
+  return path.local.root + filename;
 });
 
 // process and transform the config file contents
@@ -160,23 +160,23 @@ function sanitizeFolder(name) {
 function loadPens(metaPath) {
   // load the metaData from the file
   const metaData = JSON.parse(fs.readFileSync(metaPath));
-  if (!_.has(metaData, paths.meta.pens)) {
+  if (!_.has(metaData, path.meta.pens)) {
     log.error("Error loading and processing metadata file: .posthtmlrc");
     return;
   }
-  let pens = _.get(metaData, paths.meta.pens);
+  let pens = _.get(metaData, path.meta.pens);
 
   // ensure all existing items still exist, otherwise remove them.
   Object.keys(pens).forEach(key => {
-    let filepath = `${paths.pens}${key}/markup.html`;
+    let filepath = `${path.local.root}pens/${key}/markup.html`;
     if (!pathExists(filepath)) {
       _.unset(pens, key); // delete item
-      del([`${paths.pens}${key}`]); // entire folder
+      del([`${path.local.root}pens/${key}`]); // entire folder
       log.warn(`Deleted expired pen: ${key}`);
     }
   });
 
-  return _.set(metaData, paths.meta.pens, pens);
+  return _.set(metaData, path.meta.pens, pens);
 }
 
 // save the new metaData file
@@ -187,20 +187,20 @@ function savePens(metaPath, metaData) {
 // add a new pen to the metaData
 function addPen(metaData, key, value) {
   let ret = _.cloneDeep(metaData);
-  _.set(ret, `${paths.meta.pens}['${key}']`, value);
+  _.set(ret, `${path.meta.pens}['${key}']`, value);
   return ret;
 }
 
 // remove a new pen from the metaData
 function removePen(metaData, key) {
   let ret = _.cloneDeep(metaData);
-  _.unset(ret, `${paths.meta.pens}['${key}']`);
+  _.unset(ret, `${path.meta.pens}['${key}']`);
   return ret;
 }
 
 // return the relative pen folder path
 function destFolder(folder) {
-  return `${paths.pens}${folder}/`;
+  return `${path.local.root}pens/${folder}/`;
 }
 
 // generate the config for a title
@@ -243,7 +243,7 @@ gulp.task("config:sync", (cb) => {
 gulp.task("config:clean", () => {
   log("Deleting this repo's configs");
   return gulp
-    .src(paths.local.configs, {
+    .src(path.local.configs, {
       read: false
     })
     .pipe(debug({
@@ -256,8 +256,8 @@ gulp.task("config:clean", () => {
 gulp.task("config:copy", () => {
   log("Copying remote repo configs");
   return gulp
-    .src(paths.remote.configs, {
-      base: paths.remote.root
+    .src(path.remote.configs, {
+      base: path.remote.root
     })
     .pipe(debug({
       title: "Copied:"
@@ -269,18 +269,18 @@ gulp.task("config:copy", () => {
 // sync the package.json file from PageBuilder repo into this repo
 gulp.task("config:package", () => {
   log("Syncing with remote package.json");
-  const localPack = JSON.parse(fs.readFileSync(paths.local.package));
-  const remotePack = JSON.parse(fs.readFileSync(paths.remote.package));
+  const localPack = JSON.parse(fs.readFileSync(path.local.package));
+  const remotePack = JSON.parse(fs.readFileSync(path.remote.package));
   localPack.dependencies = updateDeps(pack.deps, localPack.dependencies, remotePack.dependencies);
   localPack.devDependencies = updateDeps(pack.devDeps, localPack.devDependencies, remotePack.devDependencies);
-  fs.writeFileSync(paths.local.package, JSON.stringify(localPack, null, 2));
+  fs.writeFileSync(path.local.package, JSON.stringify(localPack, null, 2));
   log("Syncing completed - manually run: npm install");
   return gulp;
 });
 
 // create a new pen folder, based on name param, and pen template
 gulp.task("pen:add", () => {
-  const metaData = loadPens(paths.meta.root);
+  const metaData = loadPens(path.meta.root);
 
   return gulp.src("./gulpfile.babel.js")
     .pipe(prompt.prompt([
@@ -293,26 +293,24 @@ gulp.task("pen:add", () => {
       const destination = destFolder(folder);
       const newData = addPen(metaData, folder, answer.title);
 
-      savePens(paths.meta.root, newData);
+      savePens(path.meta.root, newData);
 
-      const url = `${paths.localhost.pens}${folder}/${paths.partial.pen.markup}`;
-      log(`Created new pen: ${url}`);
-
-      return gulp.src([
-        paths.partial.pen.root + paths.partial.pen.markup,
-        paths.partial.pen.root + paths.partial.pen.script,
-        paths.partial.pen.root + paths.partial.pen.style
+      const base = path.local.root + "partial/pen/";
+      gulp.src([
+        base + path.partial.pen.markup,
+        base + path.partial.pen.script,
+        base + path.partial.pen.style
       ], {
-        base: paths.partial.pen.root
+        base: base
       })
         .pipe(gulp.dest(destination));
     }));
 });
 
 // delete an unwanted pen item and related folder
-gulp.task("pen:remove", (done) => {
-  const metaData = loadPens(paths.meta.root);
-  const pens = _.get(metaData, paths.meta.pens);
+gulp.task("pen:remove", () => {
+  const metaData = loadPens(path.meta.root);
+  const pens = _.get(metaData, path.meta.pens);
   const values = Object.keys(pens).map(k => pens[k]);
 
   return gulp.src("./gulpfile.babel.js")
@@ -327,22 +325,18 @@ gulp.task("pen:remove", (done) => {
       const destination = destFolder(folder);
       const newData = removePen(metaData, folder);
 
-      savePens(paths.meta.root, newData);
+      savePens(path.meta.root, newData);
 
-      fs.rmdir(destination, (err) => {
-        if (err) {
-          throw err;
-        }
+      del([destination]).then(() => {
         log(`Deleted folder: ${destination}`);
-        done();
       });
     }));
 });
 
 // rename an existing pen item and related folder
-gulp.task("pen:rename", (done) => {
-  const metaData = loadPens(paths.meta.root);
-  const pens = _.get(metaData, paths.meta.pens);
+gulp.task("pen:rename", () => {
+  const metaData = loadPens(path.meta.root);
+  const pens = _.get(metaData, path.meta.pens);
   const values = Object.keys(pens).map(k => pens[k]);
 
   return gulp.src("./gulpfile.babel.js")
@@ -365,20 +359,83 @@ gulp.task("pen:rename", (done) => {
       const newDestination = destFolder(newFolder);
       newData = addPen(newData, newFolder, answer.title);
 
-      savePens(paths.meta.root, newData);
+      savePens(path.meta.root, newData);
 
-      fs.renameSync(destination, newDestination, (err) => {
-        if (err) {
-          throw err;
-        }
-        log(`Renamed folder: ${newDestination}`);
-        done();
-      });
+      fs.renameSync(destination, newDestination);
+      log(`Renamed folder: ${newDestination}`);
     }));
 });
+
+// convert an existing Puma pen into Codepen.io pen
+gulp.task("pen:eject", () => {
+  const metaData = loadPens(path.meta.root);
+  const pens = _.get(metaData, path.meta.pens);
+  const values = Object.keys(pens).map(k => pens[k]);
+
+  return gulp.src("./gulpfile.babel.js")
+    .pipe(prompt.prompt([
+      promptSelect({
+        message: "Select the pen to eject:",
+        choices: values
+      })
+    ], (answer) => {
+      log(`Ejecting pen: ${answer.pen}`);
+      const folder = sanitizeFolder(answer.pen);
+      const destination = destFolder(folder);
+
+      // use the compiled markup instead of the uncompiled
+      const markup = fs.readFileSync(`${path.local.root}dist/pens/${folder}/${path.partial.pen.markup}`, "utf8");
+      // const markup = fs.readFileSync(destination + path.partial.pen.markup, "utf8");
+
+      const script = fs.readFileSync(destination + path.partial.pen.script, "utf8");
+      const style = fs.readFileSync(destination + path.partial.pen.style, "utf8");
+
+      const specimen = codepenSpecimen(answer.pen, markup, script, style);
+      const template = codepenTemplate(specimen);
+
+      const filepath = path.local.root + "dist/" + path.codepen.markup;
+      fs.writeFileSync(filepath, template);
+
+      // open the temp file in the browser
+      const uri = path.localhost + path.codepen.markup;
+      return gulp.src(__filename).pipe(open({ uri }));
+    }));
+});
+
+function codepenSpecimen(title, markup, script, style) {
+  // CodePen.io prefill: https://blog.codepen.io/documentation/api/prefill/
+  let codepenData = {
+    title: title,
+    editors: "111", // panels: html show, css show, js show
+    head: "<meta name='viewport' content='width=device-width, initial-scale=1.0'>",
+    html: markup,
+    js: script,
+    js_pre_processor: "babel",
+    css: style,
+    css_pre_processor: "scss"
+  };
+  // stringify the html for form submission to Codepen
+  return JSON.stringify(codepenData).replace(/"/g, "&​quot;").replace(/'/g, "&apos;");
+}
+
+// generate a page that will re-direct a form POST to CodePen.io prefill url
+function codepenTemplate(codepenData) {
+  return `
+  <html>
+    <head>
+      <title>TGAM Puma</title>
+    </head>
+    <body onload="document.codepen.submit()">
+      <p>Redirecting to CodePen.io ...</p>
+      <form id="codepen" name="codepen" action="https://codepen.io/pen/define" method="POST">
+        <input type="hidden" name="data" value="${codepenData}" />
+      </form>
+    </body>
+  </html>`;
+}
 
 // prune and save the pens metaData of expired pens
 gulp.task("pen:trim", () => {
   log("Pruning any pens, which don't have folders ...");
-  savePens(paths.meta.root, loadPens(paths.meta.root));
+  savePens(path.meta.root, loadPens(path.meta.root));
 });
