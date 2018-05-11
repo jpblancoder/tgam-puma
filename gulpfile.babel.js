@@ -273,7 +273,7 @@ gulp.task("config:package", () => {
   const remotePack = JSON.parse(fs.readFileSync(path.remote.package));
   localPack.dependencies = updateDeps(pack.deps, localPack.dependencies, remotePack.dependencies);
   localPack.devDependencies = updateDeps(pack.devDeps, localPack.devDependencies, remotePack.devDependencies);
-  fs.writeFileSync(path.local.package, JSON.stringify(localPack, null, 2));
+  fs.writeFileSync(path.local.package, JSON.stringify(localPack, null, 2) + "\n");
   log("Syncing completed - manually run: npm install");
   return gulp;
 });
