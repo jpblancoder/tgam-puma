@@ -5,19 +5,19 @@ domReady(() => {
   const search = document.getElementById("js-pen-search");
   const output = document.getElementById("js-pen-output");
   const links = toArray(document.getElementsByClassName("js-pen-link"));
-
   const list = links.map(link => ({
     url: link.href,
     title: link.innerHTML
   }));
 
-  const onKeyUp = () => {
-    listPens(search.value, list, output);
-  };
-  search.addEventListener("keyup", onKeyUp);
+  // no need to throttle input, since data is local.
+  search.addEventListener("keyup", () => {
+    output.innerHTML = listPens(list, search.value);
+  });
 });
 
-function listPens(input = "", values, output) {
+// return the markup for the desired pen list
+function listPens(values, input = "") {
   const options = {
     pre: "<span class='pen-highlight'>",
     post: "</span>",
@@ -27,9 +27,10 @@ function listPens(input = "", values, output) {
   const markup = filtered.map(entry => {
     return `<li><a href="${ entry.original.url }">${ entry.string }</a></li>`;
   });
-  output.innerHTML = markup.join("");
+  return markup.join("");
 }
 
+// convert nodelist to an array
 function toArray(val) {
   if (Array.from) {
     return Array.from(val);
