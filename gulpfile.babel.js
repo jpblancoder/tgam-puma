@@ -385,12 +385,16 @@ gulp.task("pen:eject", () => {
 
       // use the compiled markup instead of the uncompiled
       const markup = fs.readFileSync(`${path.local.root}dist/pens/${folder}/${path.partial.pen.markup}`, "utf8");
-      // const markup = fs.readFileSync(destination + path.partial.pen.markup, "utf8");
+
+      // get all markup between body tags
+      const start = markup.indexOf("<body>") + 6;
+      const end = markup.indexOf("</body>");
+      const body = markup.substring(start, end);
 
       const script = fs.readFileSync(destination + path.partial.pen.script, "utf8");
       const style = fs.readFileSync(destination + path.partial.pen.style, "utf8");
 
-      const specimen = codepenSpecimen(answer.pen, markup, script, style);
+      const specimen = codepenSpecimen(answer.pen, body, script, style);
       const template = codepenTemplate(specimen);
 
       const filepath = path.local.root + "dist/" + path.codepen.markup;
