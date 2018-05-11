@@ -10,13 +10,15 @@
   <body>
     <p>😺 - Select your pen or create one: <strong>npm run add</strong></p>
 
-    <p><input type="search" name="q" id="pen-search" class="pen-search"
+    <p><input type="search" name="q" id="js-pen-search" class="pen-search"
         autofocus placeholder="Type to filter list ..." /></p>
 
-    <ul id="pen-output" class="pen-output"></ul>
-    <script>
-      // use posthtml-expressions unescapeDelimiters (ignore lint warnings)
-      var pens = {{{ JSON.stringify(pens) }}};
-    </script>
+    <ul id="js-pen-output" class="pen-output">
+      <each loop="value, key in pens">
+        <li>
+          <a class="js-pen-link" href="./pens/{{key}}/markup.html">{{value}}</a>
+        </li>
+      </each>
+    </ul>
   </body>
 </html>

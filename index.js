@@ -2,17 +2,18 @@ import fuzzy from "fuzzy";
 import domReady from "domready";
 
 domReady(() => {
-  const search = document.getElementById("pen-search");
-  const output = document.getElementById("pen-output");
-  const kvps = window.pens; // kvp list (folder: title)
-  const list = Object.keys(kvps).map(key => ({
-    url: `./pens/${ key }/markup.html`,
-    title: kvps[key]
+  const search = document.getElementById("js-pen-search");
+  const output = document.getElementById("js-pen-output");
+  const links = toArray(document.getElementsByClassName("js-pen-link"));
+
+  const list = links.map(link => ({
+    url: link.href,
+    title: link.innerHTML
   }));
+
   const onKeyUp = () => {
     listPens(search.value, list, output);
   };
-  onKeyUp(); // display full list by default
   search.addEventListener("keyup", onKeyUp);
 });
 
@@ -27,4 +28,12 @@ function listPens(input = "", values, output) {
     return `<li><a href="${ entry.original.url }">${ entry.string }</a></li>`;
   });
   output.innerHTML = markup.join("");
+}
+
+function toArray(val) {
+  if (Array.from) {
+    return Array.from(val);
+  } else {
+    return [].slice.call(val);
+  }
 }
