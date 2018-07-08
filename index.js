@@ -31,10 +31,6 @@ function listPens(values, input = "") {
 }
 
 // convert nodelist to an array
-function toArray(val) {
-  if (Array.from) {
-    return Array.from(val);
-  } else {
-    return [].slice.call(val);
-  }
+function toArray(v) {
+  return (Array.from ? Array.from(v) : [].slice.call(v));
 }
