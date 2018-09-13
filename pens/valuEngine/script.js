@@ -1,87 +1,12 @@
 console.clear(); // optional
 
-const data = [
-  // Canada - Toronto Venture
-  { ticker: "A-X", success: true, region: 2, exchange: "X" },
-  { ticker: "BTL-X", success: false, region: 2, exchange: "X" },
-  { ticker: "CRON-X", success: false, region: 2, exchange: "X" },
-  { ticker: "DLI-X", success: false, region: 2, exchange: "X" },
-  { ticker: "HEMP-X", success: false, region: 2, exchange: "X" },
-  { ticker: "HUT-X", success: false, region: 2, exchange: "X" },
-  { ticker: "IPA-X", success: false, region: 2, exchange: "X" },
-  { ticker: "KUU-X", success: false, region: 2, exchange: "X" },
-  { ticker: "LRT-DB-G-X", success: false, region: 2, exchange: "X" },
-  { ticker: "OGI-X", success: true, region: 2, exchange: "X" },
-  { ticker: "SOG-X", success: true, region: 2, exchange: "X" },
-  { ticker: "TBP-WT-X", success: false, region: 2, exchange: "X" },
-  { ticker: "TBP-WT-X", success: false, region: 2, exchange: "X" },
-  { ticker: "WMD-X", success: false, region: 2, exchange: "X" },
-  // Canada - Toronto (TSX)
-  { ticker: "AX-UN-T", success: false, region: 2, exchange: "T" },
-  { ticker: "BCE-T", success: true, region: 2, exchange: "T" },
-  { ticker: "CRON-T", success: false, region: 2, exchange: "T" },
-  { ticker: "CSU-T", success: true, region: 2, exchange: "T" },
-  { ticker: "EMP-A-T", success: false, region: 2, exchange: "T" },
-  { ticker: "ENB-PF-E-T", success: false, region: 2, exchange: "T" },
-  { ticker: "ENB-T", success: true, region: 2, exchange: "T" },
-  { ticker: "ENF-T", success: true, region: 2, exchange: "T" },
-  { ticker: "MG-T", success: true, region: 2, exchange: "T" },
-  { ticker: "RCI-B-T", success: false, region: 2, exchange: "T" },
-  { ticker: "RY-T", success: true, region: 2, exchange: "T" },
-  { ticker: "SU-T", success: true, region: 2, exchange: "T" },
-  { ticker: "TECK-B-T", success: false, region: 2, exchange: "T" },
-  { ticker: "WEED-T", success: false, region: 2, exchange: "T" },
-  // America - NYSE - New York Stock Exchange
-  { ticker: "AGCO", success: true, region: 1, exchange: "N" },
-  { ticker: "BA", success: true, region: 1, exchange: "N" },
-  { ticker: "BABA", success: true, region: 1, exchange: "N" },
-  { ticker: "BBY", success: true, region: 1, exchange: "N" },
-  { ticker: "BRK-A-N", success: true, region: 1, exchange: "N" },
-  { ticker: "CPLG", success: false, region: 1, exchange: "N" },
-  { ticker: "FRO", success: true, region: 1, exchange: "N" },
-  { ticker: "JNJ-N", success: true, region: 1, exchange: "N" },
-  { ticker: "JWN", success: true, region: 1, exchange: "N" },
-  { ticker: "NOAH", success: true, region: 1, exchange: "N" },
-  { ticker: "NWHM", success: true, region: 1, exchange: "N" },
-  { ticker: "TWX-N", success: false, region: 1, exchange: "N" },
-  { ticker: "WMT", success: true, region: 1, exchange: "N" },
-  { ticker: "ZOES", success: true, region: 1, exchange: "N" },
-  // America - AMEX = American Stock Exchange
-  { ticker: "FSP", success: true, region: 1, exchange: "A" },
-  { ticker: "GBR", success: false, region: 1, exchange: "A" },
-  { ticker: "GORO", success: false, region: 1, exchange: "A" },
-  { ticker: "IEC", success: true, region: 1, exchange: "A" },
-  { ticker: "LEU", success: false, region: 1, exchange: "A" },
-  { ticker: "MAG", success: true, region: 1, exchange: "A" },
-  { ticker: "NOG", success: true, region: 1, exchange: "A" },
-  { ticker: "SAND", success: true, region: 1, exchange: "A" },
-  { ticker: "SNMP", success: true, region: 1, exchange: "A" },
-  { ticker: "SVM", success: true, region: 1, exchange: "A" },
-  { ticker: "TIK", success: false, region: 1, exchange: "A" },
-  { ticker: "TMP-A", success: false, region: 1, exchange: "A" },
-  { ticker: "TRXC", success: true, region: 1, exchange: "A" },
-  { ticker: "USAS", success: true, region: 1, exchange: "A" },
-  // America - Nasdaq
-  { ticker: "AAPL", success: true, region: 1, exchange: "Q" },
-  { ticker: "ADSK", success: true, region: 1, exchange: "Q" },
-  { ticker: "AMZN", success: true, region: 1, exchange: "Q" },
-  { ticker: "CSCO", success: true, region: 1, exchange: "Q" },
-  { ticker: "ESIO", success: true, region: 1, exchange: "Q" },
-  { ticker: "FOXA", success: true, region: 1, exchange: "Q" },
-  { ticker: "GOOG", success: true, region: 1, exchange: "Q" },
-  { ticker: "GOOGL", success: true, region: 1, exchange: "Q" },
-  { ticker: "MSFT", success: true, region: 1, exchange: "Q" },
-  { ticker: "NANO", success: true, region: 1, exchange: "Q" },
-  { ticker: "NFLX", success: true, region: 1, exchange: "Q" },
-  { ticker: "NVDA", success: true, region: 1, exchange: "Q" },
-  { ticker: "SRAX", success: true, region: 1, exchange: "Q" }
-];
-
+// regions must match expected valuEngine API endpoint regions
 const region = {
-  1: "1 / America",
-  2: "2 / Canada"
+  1: "America",
+  2: "Canada"
 };
 
+// abbreviated exchange values must match Barchart API provided values
 const exchange = {
   X: "TSE",
   T: "TSX",
@@ -89,6 +14,114 @@ const exchange = {
   A: "AMEX",
   Q: "NAS"
 };
+
+// all symbols must be Barchart API metadata provided values
+const data = [
+  {
+    region: 2,
+    exchange: "X",
+    label: "Toronto Venture",
+    stocks: [
+      { symbol: "A-X", expect: 200 },
+      { symbol: "BTL-X", expect: 404 },
+      { symbol: "CRON-X", expect: 200 },
+      { symbol: "DLI-X", expect: 404 },
+      { symbol: "HEMP-X", expect: 404 },
+      { symbol: "HUT-X", expect: 404 },
+      { symbol: "IPA-X", expect: 404 },
+      { symbol: "KUU-X", expect: 404 },
+      { symbol: "LRT-DB-G-X", expect: 404 },
+      { symbol: "OGI-X", expect: 200 },
+      { symbol: "SOG-X", expect: 200 },
+      { symbol: "TBP-WT-X", expect: 404 },
+      { symbol: "TBP-WT-X", expect: 404 },
+      { symbol: "WMD-X", expect: 404 }
+    ]
+  },
+  {
+    region: 2,
+    exchange: "T",
+    label: "Toronto",
+    stocks: [
+      { symbol: "AX-UN-T", expect: 200 },
+      { symbol: "BCE-T", expect: 200 },
+      { symbol: "CRON-T", expect: 200 },
+      { symbol: "CSU-T", expect: 200 },
+      { symbol: "EMP-A-T", expect: 200 },
+      { symbol: "ENB-PF-E-T", expect: 404 },
+      { symbol: "ENB-T", expect: 200 },
+      { symbol: "ENF-T", expect: 200 },
+      { symbol: "MG-T", expect: 200 },
+      { symbol: "RCI-B-T", expect: 200 },
+      { symbol: "RY-T", expect: 200 },
+      { symbol: "SU-T", expect: 200 },
+      { symbol: "TECK-B-T", expect: 200 },
+      { symbol: "WEED-T", expect: 404 }
+    ]
+  },
+  {
+    region: 1,
+    exchange: "N",
+    label: "New York Stock Exchange",
+    stocks: [
+      { symbol: "AGCO", expect: 200 },
+      { symbol: "BA", expect: 200 },
+      { symbol: "BABA", expect: 200 },
+      { symbol: "BBY", expect: 200 },
+      { symbol: "BRK-A-N", expect: 200 },
+      { symbol: "CPLG", expect: 404 },
+      { symbol: "FRO", expect: 200 },
+      { symbol: "JNJ-N", expect: 200 },
+      { symbol: "JWN", expect: 200 },
+      { symbol: "NOAH", expect: 200 },
+      { symbol: "NWHM", expect: 200 },
+      { symbol: "TWX-N", expect: 404 },
+      { symbol: "WMT", expect: 200 },
+      { symbol: "ZOES", expect: 200 }
+    ]
+  },
+  {
+    region: 1,
+    label: "American Stock Exchange",
+    exchange: "A",
+    stocks: [
+      { symbol: "FSP", expect: 200 },
+      { symbol: "GBR", expect: 404 },
+      { symbol: "GORO", expect: 404 },
+      { symbol: "IEC", expect: 200 },
+      { symbol: "LEU", expect: 404 },
+      { symbol: "MAG", expect: 200 },
+      { symbol: "NOG", expect: 200 },
+      { symbol: "SAND", expect: 200 },
+      { symbol: "SNMP", expect: 200 },
+      { symbol: "SVM", expect: 200 },
+      { symbol: "TIK", expect: 404 },
+      { symbol: "TMP-A", expect: 404 },
+      { symbol: "TRXC", expect: 200 },
+      { symbol: "USAS", expect: 200 }
+    ]
+  },
+  {
+    region: 1,
+    label: "Nasdaq",
+    exchange: "Q",
+    stocks: [
+      { symbol: "AAPL", expect: 200 },
+      { symbol: "ADSK", expect: 200 },
+      { symbol: "AMZN", expect: 200 },
+      { symbol: "CSCO", expect: 200 },
+      { symbol: "ESIO", expect: 200 },
+      { symbol: "FOXA", expect: 200 },
+      { symbol: "GOOG", expect: 404 },
+      { symbol: "GOOGL", expect: 200 },
+      { symbol: "MSFT", expect: 200 },
+      { symbol: "NANO", expect: 200 },
+      { symbol: "NFLX", expect: 200 },
+      { symbol: "NVDA", expect: 200 },
+      { symbol: "SRAX", expect: 200 }
+    ]
+  }
+];
 
 const success = "✅"; // PDF url displays successfully.
 const failure = "❌"; // PDF url results in 404 page.
@@ -132,61 +165,76 @@ let rows = [];
 
 const link = (href) => `<a href="${href}">${href}</a>`;
 
-data.forEach(item => {
-  let row = [];
-
-  // Convert Barchart symbol to valuEngine symbol
-  let tick = item.ticker;
-  tick = tick.replace("-" + item.exchange, "");
+/**
+ * @method mapSymbol
+ * @description Convert Barchart symbol to valuEngine symbol.
+ * This logic must matches what is done in PageBuilder valuEngine feature.
+ * @param {String} ticker - of stock
+ * @param {String} exchange - of stock
+ * @return {String}
+ */
+function mapSymbol(ticker, exchange) {
+  let tick = ticker;
+  tick = tick.replace("-" + exchange, "");
   tick = tick.replace("-", ".");
+  return tick;
+}
 
-  // Region
-  row.push(region[item.region]);
+data.forEach(item => {
+  item.stocks.forEach(stock => {
+    let row = [];
 
-  // Exchange
-  row.push(exchange[item.exchange]);
+    // Convert Barchart symbol to valuEngine symbol
+    let tick = mapSymbol(stock.symbol, item.exchange);
 
-  // PDF success
-  row.push(`${item.success ? success : failure}`);
+    // Region
+    row.push(region[item.region]);
 
-  // valuEngine API (don't link)
-  let ve = engine;
-  ve = ve.replace(SYMBOL, tick);
-  ve = ve.replace(REGION, item.region);
-  row.push(ve);
+    // Exchange
+    row.push(exchange[item.exchange]);
 
-  // AWS Proxy API
-  let aws = amazon;
-  aws = aws.replace(SYMBOL, tick);
-  aws = aws.replace(REGION, item.region);
-  aws = link(aws);
-  row.push(aws);
+    // PDF success
+    row.push(`${stock.expect === 200 ? success : failure}`);
 
-  // PageBuilder production
-  let p = prod;
-  p = p.replace(SYMBOL, item.ticker);
-  p = link(p);
-  row.push(p);
+    // valuEngine API (don't link)
+    let ve = engine;
+    ve = ve.replace(SYMBOL, tick);
+    ve = ve.replace(REGION, item.region);
+    row.push(ve);
 
-  // PageBuilder arc-dev
-  let d = dev;
-  d = d.replace(SYMBOL, item.ticker);
-  d = link(d);
-  row.push(d);
+    // AWS Proxy API
+    let aws = amazon;
+    aws = aws.replace(SYMBOL, tick);
+    aws = aws.replace(REGION, item.region);
+    aws = link(aws);
+    row.push(aws);
 
-  // PageBuilder arc-local
-  let l = local;
-  l = l.replace(SYMBOL, item.ticker);
-  l = link(l);
-  row.push(l);
+    // PageBuilder production
+    let p = prod;
+    p = p.replace(SYMBOL, stock.symbol);
+    p = link(p);
+    row.push(p);
 
-  // Seperate exchanges with an extra newline
-  if (last !== item.exchange) {
-    last = item.exchange;
-    rows.push(`<br>${nl}`);
-  }
+    // PageBuilder arc-dev
+    let d = dev;
+    d = d.replace(SYMBOL, stock.symbol);
+    d = link(d);
+    row.push(d);
 
-  rows.push(`<div>${row.join(tab)}</div>`);
+    // PageBuilder arc-local
+    let l = local;
+    l = l.replace(SYMBOL, stock.symbol);
+    l = link(l);
+    row.push(l);
+
+    // Seperate exchanges with an extra newline
+    if (last !== item.exchange) {
+      last = item.exchange;
+      rows.push(`<br>${nl}`);
+    }
+
+    rows.push(`<div>${row.join(tab)}</div>`);
+  });
 });
 
 document.getElementById("output").innerHTML = header + rows.join(nl);
