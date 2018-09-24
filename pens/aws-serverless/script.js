@@ -878,8 +878,8 @@ const dev = "https://arc-dev.theglobeandmail.com/investing/markets/stocks/{TICKE
 const prod = "https://www.theglobeandmail.com/investing/markets/stocks/{TICKER}/";
 
 // amazon web services APIs
-const veAmazon = "https://tg4b1hf6m1.execute-api.ca-central-1.amazonaws.com/pb/valuengine-report.pdf?symbol={TICKER}&amp;region={REGION}&amp;uid=" + uid;
-const scAmazon = "https://tg4b1hf6m1.execute-api.ca-central-1.amazonaws.com/pb/stockcalc-report.pdf?symbol={TICKER}";
+const veAmazon = "https://ry7vrsmegi.execute-api.ca-central-1.amazonaws.com/pb/valuengine-report.pdf?symbol={TICKER}&amp;region={REGION}&amp;uid=" + uid;
+const scAmazon = "https://ry7vrsmegi.execute-api.ca-central-1.amazonaws.com/pb/stockcalc-report.pdf?symbol={TICKER}";
 
 // valuEngine API
 const engine = `https://www.valuengine.com/api/report/{REGION}/{TICKER}/${client}/${uid}`;
@@ -999,4 +999,7 @@ stocks.forEach(item => {
   });
 });
 
-document.getElementById("output").innerHTML = header + rows.join(nl);
+const out = document.getElementById("output");
+if (out) {
+  out.innerHTML = header + rows.join(nl);
+}
