@@ -22,7 +22,8 @@
           "Testing_more_destructuring": "Testing more destructuring",
           "isFunctionThenInvoke": "isFunctionThenInvoke",
           "Token": "Token",
-          "aws-serverless": "aws-serverless"
+          "aws-serverless": "aws-serverless",
+          "ifCond": "ifCond"
         }
       }
     }
