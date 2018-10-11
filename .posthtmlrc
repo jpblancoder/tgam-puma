@@ -23,7 +23,8 @@
           "isFunctionThenInvoke": "isFunctionThenInvoke",
           "Token": "Token",
           "aws-serverless": "aws-serverless",
-          "ifCond": "ifCond"
+          "ifCond": "ifCond",
+          "Lodash_extend": "Lodash extend"
         }
       }
     }
