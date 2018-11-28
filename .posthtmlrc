@@ -24,7 +24,8 @@
           "Token": "Token",
           "aws-serverless": "aws-serverless",
           "ifCond": "ifCond",
-          "Lodash_extend": "Lodash extend"
+          "Lodash_extend": "Lodash extend",
+          "Barchart_stock_detail": "Barchart stock detail"
         }
       }
     }
