@@ -178,18 +178,6 @@ const stocks = [
         ticker: "SXL-X",
         ve: 404,
         sc: 200
-      },
-      {
-        symbol: "OGI.VN",
-        symbolName: "Organigram Holdings Inc",
-        assetType: "STK",
-        exchange: "TSX Venture",
-        exchange_abbr: "X",
-        fundFamily: "N/A",
-        region: "US",
-        ticker: "OGI-X",
-        ve: 200,
-        sc: 200
       }
     ]
   },
@@ -207,7 +195,7 @@ const stocks = [
         region: "CA",
         ticker: "AX-UN-T",
         exchange_abbr: "T",
-        ve: 200,
+        ve: 404,
         sc: 200
       },
       {
@@ -231,7 +219,7 @@ const stocks = [
         region: "CA",
         ticker: "CRON-T",
         exchange_abbr: "T",
-        ve: 200,
+        ve: 404,
         sc: 200
       },
       {
@@ -255,7 +243,7 @@ const stocks = [
         region: "CA",
         ticker: "EMP-A-T",
         exchange_abbr: "T",
-        ve: 200,
+        ve: 404,
         sc: 200
       },
       {
@@ -291,8 +279,8 @@ const stocks = [
         region: "CA",
         ticker: "ENF-T",
         exchange_abbr: "T",
-        ve: 200,
-        sc: 200
+        ve: 404,
+        sc: 404
       },
       {
         symbol: "MG.TO",
@@ -315,7 +303,7 @@ const stocks = [
         region: "CA",
         ticker: "RCI-B-T",
         exchange_abbr: "T",
-        ve: 200,
+        ve: 404,
         sc: 200
       },
       {
@@ -351,7 +339,7 @@ const stocks = [
         region: "CA",
         ticker: "TECK-B-T",
         exchange_abbr: "T",
-        ve: 200,
+        ve: 404,
         sc: 200
       },
       {
@@ -538,8 +526,8 @@ const stocks = [
         region: "US",
         ticker: "ZOES-N",
         exchange_abbr: "N",
-        ve: 200,
-        sc: 200
+        ve: 404,
+        sc: 404
       }
     ]
   },
