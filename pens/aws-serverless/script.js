@@ -32,8 +32,9 @@ const stocks = [
         fundFamily: "N/A",
         region: "US",
         ticker: "A-X",
-        ve: 200, // valuEngine - expected result
-        sc: 200 // stockCalc - expected result
+        ve: 404, // valuEngine - expected result
+        sc: 200, // stockCalc - expected result
+        bc: 200 // Barchart - expected result
       },
       {
         symbol: "BTL.VN",
@@ -45,7 +46,8 @@ const stocks = [
         region: "US",
         ticker: "BTL-X",
         ve: 404,
-        sc: 200
+        sc: 404,
+        bc: 200
       },
       {
         symbol: "DLI.VN",
@@ -57,7 +59,8 @@ const stocks = [
         region: "US",
         ticker: "DLI-X",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "HEMP.VN",
@@ -69,7 +72,8 @@ const stocks = [
         region: "US",
         ticker: "HEMP-X",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "HUT.VN",
@@ -81,7 +85,8 @@ const stocks = [
         region: "US",
         ticker: "HUT-X",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "IPA.VN",
@@ -93,7 +98,8 @@ const stocks = [
         region: "US",
         ticker: "IPA-X",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "KUU.VN",
@@ -104,8 +110,9 @@ const stocks = [
         fundFamily: "N/A",
         region: "US",
         ticker: "KUU-X",
-        ve: 404,
-        sc: 200
+        ve: 200,
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "LRT-DB-G.VN",
@@ -117,7 +124,8 @@ const stocks = [
         region: "US",
         ticker: "LRT-DB-G-X",
         ve: 404,
-        sc: 404
+        sc: 404,
+        bc: 200
       },
       {
         symbol: "OGI.VN",
@@ -129,7 +137,8 @@ const stocks = [
         region: "US",
         ticker: "OGI-X",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "SOG.VN",
@@ -141,7 +150,8 @@ const stocks = [
         region: "US",
         ticker: "SOG-X",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "TBP-WT.VN",
@@ -153,7 +163,8 @@ const stocks = [
         region: "US",
         ticker: "TBP-WT-X",
         ve: 404,
-        sc: 404
+        sc: 404,
+        bc: 200
       },
       {
         symbol: "WMD.VN",
@@ -164,8 +175,9 @@ const stocks = [
         fundFamily: "N/A",
         region: "US",
         ticker: "WMD-X",
-        ve: 404,
-        sc: 200
+        ve: 200,
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "SXL.VN",
@@ -177,7 +189,8 @@ const stocks = [
         region: "US",
         ticker: "SXL-X",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       }
     ]
   },
@@ -196,7 +209,8 @@ const stocks = [
         ticker: "AX-UN-T",
         exchange_abbr: "T",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "BCE.TO",
@@ -208,7 +222,8 @@ const stocks = [
         ticker: "BCE-T",
         exchange_abbr: "T",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "CRON.TO",
@@ -220,7 +235,8 @@ const stocks = [
         ticker: "CRON-T",
         exchange_abbr: "T",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "CSU.TO",
@@ -232,7 +248,8 @@ const stocks = [
         ticker: "CSU-T",
         exchange_abbr: "T",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "EMP-A.TO",
@@ -244,7 +261,8 @@ const stocks = [
         ticker: "EMP-A-T",
         exchange_abbr: "T",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "ENB-PF-E.TO",
@@ -256,7 +274,8 @@ const stocks = [
         ticker: "ENB-PF-E-T",
         exchange_abbr: "T",
         ve: 404,
-        sc: 404
+        sc: 404,
+        bc: 200
       },
       {
         symbol: "ENB.TO",
@@ -268,7 +287,8 @@ const stocks = [
         ticker: "ENB-T",
         exchange_abbr: "T",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "ENF.TO",
@@ -280,7 +300,8 @@ const stocks = [
         ticker: "ENF-T",
         exchange_abbr: "T",
         ve: 404,
-        sc: 404
+        sc: 404,
+        bc: 200
       },
       {
         symbol: "MG.TO",
@@ -292,7 +313,8 @@ const stocks = [
         ticker: "MG-T",
         exchange_abbr: "T",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "RCI-B.TO",
@@ -304,7 +326,8 @@ const stocks = [
         ticker: "RCI-B-T",
         exchange_abbr: "T",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "RY.TO",
@@ -316,7 +339,8 @@ const stocks = [
         ticker: "RY-T",
         exchange_abbr: "T",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "SU.TO",
@@ -328,7 +352,8 @@ const stocks = [
         ticker: "SU-T",
         exchange_abbr: "T",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "TECK-B.TO",
@@ -340,7 +365,8 @@ const stocks = [
         ticker: "TECK-B-T",
         exchange_abbr: "T",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "WEED.TO",
@@ -352,7 +378,8 @@ const stocks = [
         ticker: "WEED-T",
         exchange_abbr: "T",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       }
     ]
   },
@@ -371,7 +398,8 @@ const stocks = [
         ticker: "AGCO-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "BA",
@@ -383,7 +411,8 @@ const stocks = [
         ticker: "BA-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "BABA",
@@ -395,7 +424,8 @@ const stocks = [
         ticker: "BABA-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "BBY",
@@ -407,7 +437,8 @@ const stocks = [
         ticker: "BBY-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "BRK.A",
@@ -419,7 +450,8 @@ const stocks = [
         ticker: "BRK-A-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 404
+        sc: 404,
+        bc: 200
       },
       {
         symbol: "CPLG",
@@ -431,7 +463,8 @@ const stocks = [
         ticker: "CPLG-N",
         exchange_abbr: "N",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "FRO",
@@ -443,7 +476,8 @@ const stocks = [
         ticker: "FRO-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "JNJ",
@@ -455,7 +489,8 @@ const stocks = [
         ticker: "JNJ-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "JWN",
@@ -467,7 +502,8 @@ const stocks = [
         ticker: "JWN-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "NOAH",
@@ -479,7 +515,8 @@ const stocks = [
         ticker: "NOAH-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "NWHM",
@@ -490,8 +527,9 @@ const stocks = [
         region: "US",
         ticker: "NWHM-N",
         exchange_abbr: "N",
-        ve: 200,
-        sc: 200
+        ve: 404,
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "TWX",
@@ -503,7 +541,8 @@ const stocks = [
         ticker: "TWX-N",
         exchange_abbr: "N",
         ve: 404,
-        sc: 404
+        sc: 404,
+        bc: 404
       },
       {
         symbol: "WMT",
@@ -515,7 +554,8 @@ const stocks = [
         ticker: "WMT-N",
         exchange_abbr: "N",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "ZOES",
@@ -527,7 +567,8 @@ const stocks = [
         ticker: "ZOES-N",
         exchange_abbr: "N",
         ve: 404,
-        sc: 404
+        sc: 404,
+        bc: 200
       }
     ]
   },
@@ -546,7 +587,8 @@ const stocks = [
         ticker: "FSP",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "GBR",
@@ -558,7 +600,8 @@ const stocks = [
         ticker: "GBR",
         exchange_abbr: "A",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "GORO",
@@ -570,7 +613,8 @@ const stocks = [
         ticker: "GORO",
         exchange_abbr: "A",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "IEC",
@@ -582,7 +626,8 @@ const stocks = [
         ticker: "IEC",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "LEU",
@@ -594,7 +639,8 @@ const stocks = [
         ticker: "LEU",
         exchange_abbr: "A",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "MAG",
@@ -606,7 +652,8 @@ const stocks = [
         ticker: "MAG",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "NOG",
@@ -618,7 +665,8 @@ const stocks = [
         ticker: "NOG",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "SAND",
@@ -630,7 +678,8 @@ const stocks = [
         ticker: "SAND",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "SNMP",
@@ -642,7 +691,8 @@ const stocks = [
         ticker: "SNMP",
         exchange_abbr: "A",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "SVM",
@@ -654,7 +704,8 @@ const stocks = [
         ticker: "SVM",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "TIK",
@@ -666,7 +717,8 @@ const stocks = [
         ticker: "TIK",
         exchange_abbr: "A",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "TMP",
@@ -678,7 +730,8 @@ const stocks = [
         ticker: "TMP",
         exchange_abbr: "A",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "TRXC",
@@ -690,7 +743,8 @@ const stocks = [
         ticker: "TRXC",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "USAS",
@@ -702,7 +756,8 @@ const stocks = [
         ticker: "USAS",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "CCF",
@@ -714,7 +769,8 @@ const stocks = [
         ticker: "CCF",
         exchange_abbr: "A",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "TGB",
@@ -726,7 +782,8 @@ const stocks = [
         ticker: "TGB",
         exchange_abbr: "A",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       }
     ]
   },
@@ -745,7 +802,8 @@ const stocks = [
         ticker: "AAPL-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "ADSK",
@@ -757,7 +815,8 @@ const stocks = [
         ticker: "ADSK-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "AMZN",
@@ -769,7 +828,8 @@ const stocks = [
         ticker: "AMZN-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "CSCO",
@@ -781,7 +841,8 @@ const stocks = [
         ticker: "CSCO-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "ESIO",
@@ -793,7 +854,8 @@ const stocks = [
         ticker: "ESIO-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "FOXA",
@@ -805,7 +867,8 @@ const stocks = [
         ticker: "FOXA-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "GOOG",
@@ -817,7 +880,8 @@ const stocks = [
         ticker: "GOOG-Q",
         exchange_abbr: "Q",
         ve: 404,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "GOOGL",
@@ -829,7 +893,8 @@ const stocks = [
         ticker: "GOOGL-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "MSFT",
@@ -841,7 +906,8 @@ const stocks = [
         ticker: "MSFT-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "NANO",
@@ -853,7 +919,8 @@ const stocks = [
         ticker: "NANO-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "NFLX",
@@ -865,7 +932,8 @@ const stocks = [
         ticker: "NFLX-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "NVDA",
@@ -877,7 +945,8 @@ const stocks = [
         ticker: "NVDA-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       },
       {
         symbol: "SRAX",
@@ -889,7 +958,8 @@ const stocks = [
         ticker: "SRAX-Q",
         exchange_abbr: "Q",
         ve: 200,
-        sc: 200
+        sc: 200,
+        bc: 200
       }
     ]
   }

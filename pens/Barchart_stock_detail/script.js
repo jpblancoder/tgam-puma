@@ -33,7 +33,7 @@ const stocks = [
         fundFamily: "N/A",
         region: "US",
         ticker: "A-X",
-        ve: 200, // valuEngine - expected result
+        ve: 404, // valuEngine - expected result
         sc: 200, // stockCalc - expected result
         bc: 200 // Barchart - expected result
       },
@@ -47,7 +47,7 @@ const stocks = [
         region: "US",
         ticker: "BTL-X",
         ve: 404,
-        sc: 200,
+        sc: 404,
         bc: 200
       },
       {
@@ -111,7 +111,7 @@ const stocks = [
         fundFamily: "N/A",
         region: "US",
         ticker: "KUU-X",
-        ve: 404,
+        ve: 200,
         sc: 200,
         bc: 200
       },
@@ -176,7 +176,7 @@ const stocks = [
         fundFamily: "N/A",
         region: "US",
         ticker: "WMD-X",
-        ve: 404,
+        ve: 200,
         sc: 200,
         bc: 200
       },
@@ -528,7 +528,7 @@ const stocks = [
         region: "US",
         ticker: "NWHM-N",
         exchange_abbr: "N",
-        ve: 200,
+        ve: 404,
         sc: 200,
         bc: 200
       },
@@ -589,7 +589,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "GBR",
@@ -602,7 +602,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 404,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "GORO",
@@ -615,7 +615,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 404,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "IEC",
@@ -628,7 +628,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "LEU",
@@ -641,7 +641,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 404,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "MAG",
@@ -654,7 +654,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "NOG",
@@ -667,7 +667,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "SAND",
@@ -680,7 +680,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "SNMP",
@@ -693,7 +693,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 404,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "SVM",
@@ -706,7 +706,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "TIK",
@@ -719,7 +719,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 404,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "TMP",
@@ -732,7 +732,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 404,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "TRXC",
@@ -745,7 +745,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "USAS",
@@ -758,7 +758,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "CCF",
@@ -771,7 +771,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 404,
         sc: 200,
-        bc: 500
+        bc: 200
       },
       {
         symbol: "TGB",
@@ -784,7 +784,7 @@ const stocks = [
         exchange_abbr: "A",
         ve: 200,
         sc: 200,
-        bc: 500
+        bc: 200
       }
     ]
   },
