@@ -983,9 +983,9 @@ const local = "http://arc-local.theglobeandmail.com:8888/pb/investing/markets/st
 const dev = "https://arc-dev.theglobeandmail.com/investing/markets/stocks/{TICKER}/";
 const prod = "https://www.theglobeandmail.com/investing/markets/stocks/{TICKER}/";
 
-// amazon web services APIs
-const veAmazon = "https://ry7vrsmegi.execute-api.ca-central-1.amazonaws.com/pb/valuengine-report.pdf?symbol={TICKER}&amp;region={REGION}&amp;uid=" + uid;
-const scAmazon = "https://ry7vrsmegi.execute-api.ca-central-1.amazonaws.com/pb/stockcalc-report.pdf?symbol={TICKER}";
+// amazon web services PROD APIs
+const veAmazon = "https://bfay1utnpg.execute-api.ca-central-1.amazonaws.com/prod/valuengine-report.pdf?symbol={TICKER}&amp;region={REGION}&amp;uid=" + uid;
+const scAmazon = "https://bfay1utnpg.execute-api.ca-central-1.amazonaws.com/prod/stockcalc-report.pdf?symbol={TICKER}";
 
 // valuEngine API
 const engine = `https://www.valuengine.com/api/report/{REGION}/{TICKER}/${client}/${uid}`;
