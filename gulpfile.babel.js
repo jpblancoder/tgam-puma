@@ -1,6 +1,11 @@
 /* global process, __filename, Buffer */
 
-import _ from "lodash";
+import has from "lodash/has";
+import get from "lodash/get";
+import set from "lodash/set";
+import map from "lodash/map";
+import unset from "lodash/unset";
+import cloneDeep from "lodash/cloneDeep";
 import autocomplete from "inquirer-autocomplete-prompt";
 import debug from "gulp-debug";
 import del from "del";
@@ -84,20 +89,20 @@ const path = {
 
 // config paths to remote repo
 path.remote.package = path.remote.root + path.base.package;
-path.remote.configs = _.map(path.base.configs, filename => {
+path.remote.configs = map(path.base.configs, filename => {
   return path.remote.root + filename;
 });
 
 // config paths to local repo
 path.local.package = path.local.root + path.base.package;
-path.local.configs = _.map(path.base.configs, filename => {
+path.local.configs = map(path.base.configs, filename => {
   return path.local.root + filename;
 });
 
 // process and transform the config file contents
 function transformBabel(file) {
   const babel = JSON.parse(file.contents.toString());
-  _.unset(babel, "env");
+  unset(babel, "env");
   file.contents = new Buffer(JSON.stringify(babel, null, 2));
   return file;
 }
@@ -106,24 +111,24 @@ function transformBabel(file) {
 function transformEsLint(file) {
   const eslint = JSON.parse(file.contents.toString());
   // add more console methods to ignore
-  if (_.has(eslint, "rules['no-console'][1].allow")) {
+  if (has(eslint, "rules['no-console'][1].allow")) {
     eslint.rules["no-console"][1].allow.push("clear", "log");
   }
-  _.unset(eslint, "globals");
+  unset(eslint, "globals");
   file.contents = new Buffer(JSON.stringify(eslint, null, 2));
   return file;
 }
 
 // update each dependency item in list
 function updateDeps(list, oldDeps, newDeps) {
-  let ret = _.cloneDeep(oldDeps);
+  let ret = cloneDeep(oldDeps);
   list.forEach(item => {
     let value = newDeps[item];
     if (value) {
       ret[item] = value;
       log(`Synced: ${item}: ${value}`);
     } else {
-      log.warning(`Missed: ${item}`);
+      log.warn(`Missed: ${item}`);
     }
   });
   return ret;
@@ -160,23 +165,23 @@ function sanitizeFolder(name) {
 function loadPens(metaPath) {
   // load the metaData from the file
   const metaData = JSON.parse(fs.readFileSync(metaPath));
-  if (!_.has(metaData, path.meta.pens)) {
+  if (!has(metaData, path.meta.pens)) {
     log.error("Error loading and processing metadata file: .posthtmlrc");
     return;
   }
-  let pens = _.get(metaData, path.meta.pens);
+  let pens = get(metaData, path.meta.pens);
 
   // ensure all existing items still exist, otherwise remove them.
   Object.keys(pens).forEach(key => {
     let filepath = `${path.local.root}pens/${key}/markup.html`;
     if (!pathExists(filepath)) {
-      _.unset(pens, key); // delete item
+      unset(pens, key); // delete item
       del([`${path.local.root}pens/${key}`]); // entire folder
       log.warn(`Deleted expired pen: ${key}`);
     }
   });
 
-  return _.set(metaData, path.meta.pens, pens);
+  return set(metaData, path.meta.pens, pens);
 }
 
 // save the new metaData file
@@ -186,15 +191,15 @@ function savePens(metaPath, metaData) {
 
 // add a new pen to the metaData
 function addPen(metaData, key, value) {
-  let ret = _.cloneDeep(metaData);
-  _.set(ret, `${path.meta.pens}['${key}']`, value);
+  let ret = cloneDeep(metaData);
+  set(ret, `${path.meta.pens}['${key}']`, value);
   return ret;
 }
 
 // remove a new pen from the metaData
 function removePen(metaData, key) {
-  let ret = _.cloneDeep(metaData);
-  _.unset(ret, `${path.meta.pens}['${key}']`);
+  let ret = cloneDeep(metaData);
+  unset(ret, `${path.meta.pens}['${key}']`);
   return ret;
 }
 
@@ -310,7 +315,7 @@ gulp.task("pen:add", () => {
 // delete an unwanted pen item and related folder
 gulp.task("pen:remove", () => {
   const metaData = loadPens(path.meta.root);
-  const pens = _.get(metaData, path.meta.pens);
+  const pens = get(metaData, path.meta.pens);
   const values = Object.keys(pens).map(k => pens[k]);
 
   return gulp.src("./gulpfile.babel.js")
@@ -336,7 +341,7 @@ gulp.task("pen:remove", () => {
 // rename an existing pen item and related folder
 gulp.task("pen:rename", () => {
   const metaData = loadPens(path.meta.root);
-  const pens = _.get(metaData, path.meta.pens);
+  const pens = get(metaData, path.meta.pens);
   const values = Object.keys(pens).map(k => pens[k]);
 
   return gulp.src("./gulpfile.babel.js")
@@ -369,7 +374,7 @@ gulp.task("pen:rename", () => {
 // convert an existing Puma pen into Codepen.io pen
 gulp.task("pen:eject", () => {
   const metaData = loadPens(path.meta.root);
-  const pens = _.get(metaData, path.meta.pens);
+  const pens = get(metaData, path.meta.pens);
   const values = Object.keys(pens).map(k => pens[k]);
 
   return gulp.src("./gulpfile.babel.js")
