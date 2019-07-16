@@ -26,7 +26,7 @@
     "reqwest": "2.0.5"
   },
   "devDependencies": {
-    "autoprefixer": "9.5.0",
+    "autoprefixer": "9.6.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-preset-es2015": "6.24.1",
     "concurrently": "4.1.1",
@@ -35,7 +35,7 @@
     "eslint": "5.15.3",
     "eslint-config-idiomatic": "4.0.0",
     "eslint-friendly-formatter": "4.0.1",
-    "eslint-loader": "2.1.2",
+    "eslint-loader": "2.2.1",
     "fancy-log": "1.3.3",
     "fuzzy": "0.1.3",
     "gulp": "3.9.1",
@@ -44,7 +44,7 @@
     "gulp-prompt": "1.2.0",
     "inquirer-autocomplete-prompt": "1.0.1",
     "lodash": "4.17.14",
-    "node-sass": "4.11.0",
+    "node-sass": "4.12.0",
     "posthtml-expressions": "1.1.1",
     "posthtml-head-elements": "0.5.1",
     "posthtml-include": "1.2.0",
