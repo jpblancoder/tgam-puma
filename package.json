@@ -44,7 +44,7 @@
     "gulp-prompt": "1.2.0",
     "inquirer-autocomplete-prompt": "1.0.1",
     "lodash": "4.17.14",
-    "node-sass": "4.12.0",
+    "node-sass": "4.14.1",
     "posthtml-expressions": "1.1.1",
     "posthtml-head-elements": "0.5.1",
     "posthtml-include": "1.2.0",
